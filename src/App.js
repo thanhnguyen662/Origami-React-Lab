@@ -1,37 +1,34 @@
 import './App.css';
-import React, {useState} from 'react';
-//import FooterUL from './components/layout/Footer/FooterUL';
-import Main from './components/layout/Main';
+import React from 'react';
+import Main from './components/Post/Main';
 import Navbar from './components/layout/Navbar'
 import Aside from './components/layout/Aside'
 import Footer from './components/layout/Footer';
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import Thoughts from "./components/Thoughts/Thoughts"
+import RegisterForm from "./components/Register/RegisterForm"
+import LoginForm from "./components/Login/LoginForm"
+import Profile from "./components/Profile/Profile"
 
+function App() {
 
-function App(props) {
-  
-  const [title] = useState([
-    { id: 1, title: 'Going to 1 ' },
-    { id: 2, title: 'Going to 2 ' },
-    { id: 3, title: 'Going to 3 ' },
-    { id: 4, title: 'Going to 4 ' },
-    { id: 5, title: 'Going to 5 ' },
-    { id: 6, title: 'Going to 6 ' },
-    { id: 7, title: 'Going to 7 ' },
-    { id: 8, title: 'Going to 8 ' },
-    { id: 9, title: 'Going to 9 ' },
-    { id: 10, title: 'Going to 10 ' }
-]);
-  
-  
   return (
-    <div className='App'>
-      <Navbar titles={title}/>
-      <div className='Container'>
-        <Aside titles={title} />
-        <Main />
+    <Router>
+      <div className='App'>
+        <Navbar />
+        <div className='Container'>
+          <Aside />
+          <Switch>
+            <Route exact path="/thoughts" component={Thoughts} />
+            <Route exact path="/" component={Main} />
+            <Route exact path="/register" component={RegisterForm} />
+            <Route exact path="/login" component={LoginForm} />
+            <Route exact path="/profile" component={Profile} />
+          </Switch>
+        </div>
+        <Footer />
       </div>
-      <Footer titles={title} />
-    </div>
+    </Router>
   );
 }
 

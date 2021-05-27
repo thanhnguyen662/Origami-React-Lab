@@ -1,10 +1,10 @@
 /* App Styles*/
 
-@import url('https://fonts.googleapis.com/css?family=Indie+Flower&display=swap');
+@import url("https://fonts.googleapis.com/css?family=Indie+Flower&display=swap");
 * {
     margin: 0;
     padding: 0;
-    font-family: 'Indie- Flower', cursive;
+    font-family: "Indie- Flower", cursive;
 }
 
 .App {
@@ -52,7 +52,8 @@ footer .listItem a {
     text-decoration: none;
 }
 
-nav .listItem, footer .listItem {
+nav .listItem,
+footer .listItem {
     display: inline-block;
     height: auto;
     margin-right: 2%;
@@ -131,7 +132,7 @@ aside .listItem:hover {
     height: 89.5vh;
     /* border:1px solid red; */
     vertical-align: top;
-    cursor: pointer
+    cursor: pointer;
 }
 
 /* Aside Styles */
@@ -190,7 +191,6 @@ h1 {
     width: 95%;
     display: inline-block;
     vertical-align: top;
-    ;
 }
 
 .Post div {
@@ -214,7 +214,6 @@ h1 {
 
 /* Post Styles */
 
-
 /* Footer Styles */
 
 .Footer {
@@ -229,7 +228,119 @@ h1 {
 
 .Footer p {
     text-align: center;
-    font-weight: bold;;
+    font-weight: bold;
 }
 
 /* Footer Styles */
+
+/* Create Post Style */
+.Input {
+    display: inline-block;
+    padding: 0.5%;
+    width: 83%;
+}
+textarea {
+    width: 40%;
+    display: block;
+    margin: 0 auto;
+    resize: none;
+    padding: 2%;
+    height: 10vh;
+    font-style: italic;
+    border-radius: 6px;
+    border: 1px solid #234465;
+    color: #234465;
+}
+button {
+    background-color: #234465;
+    color: white;
+    padding: 1%;
+    width: 7%;
+    border-radius: 6px;
+    display: block;
+    margin: 0 auto;
+    border: none;
+    margin-top: 0.5%;
+    border: 2px solid white;
+    margin-bottom: 2%;
+}
+button:hover {
+    background-color: white;
+    border: 2px solid #234465;
+    color: #234465;
+    font-style: italic;
+}
+.Input h2 {
+    color: #234465;
+    text-decoration: underline;
+}
+/* Create Post Style */
+
+/* Create Login Register Style */
+.Login,
+.Register {
+    width: 83%;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.form-control {
+    width: 30%;
+    margin: 0 auto;
+    padding: 1%;
+    text-align: center;
+}
+
+label {
+    float: left;
+    width: 30%;
+    text-align: right;
+}
+
+input {
+    text-align: center;
+    border: 1px solid #234465;
+    padding: 1%;
+    width: 50%;
+    border-radius: 6px;
+    color: #234465;
+}
+
+form button {
+    width: auto;
+    padding: 2%;
+}
+
+/* Create Login Register Style */
+
+/* Create Profile Style */
+.Profile {
+    width: 83%;
+    display: inline-block;
+    vertical-align: top;
+    padding: 0.5%;
+}
+.Profile img {
+    max-width: 265px;
+    margin: 0 auto;
+    display: block;
+}
+.Profile .personal-info {
+    vertical-align: top;
+    padding: 10px;
+    margin: 0 auto;
+    color: #234465;
+    width: 50%;
+    text-align: center;
+}
+.Profile p {
+    text-decoration: underline;
+    margin-bottom: 1%;
+}
+
+.Profile h2 {
+    color: #234465;
+    text-decoration: underline;
+}
+
+/* Create Profile Style */

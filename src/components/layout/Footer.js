@@ -1,33 +1,35 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import logo3 from '../../img/logo3.png';
-import {animateScroll as scroll} from 'react-scroll'
-import {Link} from 'react-scroll'
-
-
-Footer.propTypes = {
-    titles: PropTypes.array
-};
-
-Footer.defaultProps = {
-    titles: []
-}
+import { animateScroll as scroll } from 'react-scroll'
+import { Link } from 'react-router-dom';
 
 function Footer(props) {
 
-const {titles} = props
-
     return (
-        <footer className="Footer" onClick={() => scroll.scrollToTop()}>
+        <footer className="Footer" >
             <ul>
-                {titles.map(title => (
-                    <li className="listItem">
-                        <Link key={title.id} to={title.id} smooth={true} duration={700} offset={-160} >{title.title}</Link>
-                    </li>
-                ))}
+                <li className="listItem" >
+                    <Link to="/">Post</Link>
+                </li>
 
                 <li className="listItem">
-                    <img src={logo3} alt="img"  />
+                    <Link to="/thoughts">Thoughts</Link>
+                </li>
+
+                <li className="listItem">
+                    <Link to="/register">Register</Link>
+                </li>
+
+                <li className="listItem">
+                    <Link to="/login">Login</Link>
+                </li>
+
+                <li className="listItem">
+                    <Link to="/profile">Profile</Link>
+                </li>
+
+                <li className="listItem" onClick={() => scroll.scrollToTop()}>
+                    <img src={logo3} alt="img" />
                 </li>
             </ul>
         </footer>

@@ -1,27 +1,30 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import {Link} from 'react-scroll'
+import { Link } from 'react-router-dom';
 
-Aside.propTypes = {
-    titles: PropTypes.array
-};
-
-Aside.defaultProps = {
-    titles: []
-}
-
-function Aside(props) {
-
-    const { titles } = props;
+function Aside() {
 
     return (
-        <aside className="Aside" style={{marginLeft:'10px'}}>
+        <aside className="Aside">
             <ul>
-                {titles.map(title =>(
-                    <li className="listItem">
-                        <Link key={title.id} to={title.id} smooth={true} duration={700} offset={-160} >{title.title}</Link>
-                    </li>                
-                ))}
+                <li className="listItem">
+                    <Link to="/">Post</Link>
+                </li>
+
+                <li className="listItem">
+                    <Link to="/thoughts">Thoughts</Link>
+                </li>
+
+                <li className="listItem">
+                    <Link to="/register">Register</Link>
+                </li>
+
+                <li className="listItem">
+                    <Link to="/login">Login</Link>
+                </li>
+
+                <li className="listItem">
+                    <Link to="/profile">Profile</Link>
+                </li>
             </ul>
         </aside>
     );
