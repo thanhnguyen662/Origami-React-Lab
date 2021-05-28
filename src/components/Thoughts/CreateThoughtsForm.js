@@ -1,12 +1,44 @@
-import React from 'react';
+import React, { useState } from 'react';
+import PropTypes from 'prop-types';
+
+CreateThoughtsForm.propTypes = {
+    onThoughtsFormSubmit: PropTypes.func,
+}
+
+CreateThoughtsForm.defaultProps = {
+    onThoughtsFormSubmit: null
+}
 
 function CreateThoughtsForm(props) {
+    const { onThoughtsFormSubmit } = props;
+    const [description, setDescription] = useState('')
+
+    function handleValueChange(e) {
+        setDescription(e.target.value)
+    }
+
+    function handleThoughtsSubmit(e) {
+        e.preventDefault();
+        if (!onThoughtsFormSubmit) return;
+        const formValues = {
+            description: description
+        };
+
+        onThoughtsFormSubmit(formValues);
+    }
+
     return (
-        <div>
-            <h1>Share your thoughts...</h1>
-            <textarea></textarea>
-            <button>Post</button>
-        </div>
+        <form onSubmit={handleThoughtsSubmit}>
+            <div>
+                <h1>Share your thoughts...</h1>
+                <textarea
+                    value={description}
+                    onChange={handleValueChange}
+                >
+                </textarea>
+                <button type="submit">Post</button>
+            </div>
+        </form>
     );
 }
 

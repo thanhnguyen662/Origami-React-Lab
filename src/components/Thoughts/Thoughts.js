@@ -19,10 +19,13 @@ function Thoughts(props) {
         getLatestPost()
     }, [])
 
+    function handleThoughtsFormSubmit(formValues) {
+        console.log('Form submit: ', formValues)
+    }
+
     return (
         <div className='Input'>
-            <CreateThoughtsForm />
-
+            <CreateThoughtsForm onThoughtsFormSubmit={handleThoughtsFormSubmit} />
             <div>
                 <h2>Last 3 post on your wall</h2>
                 <LatestPost latestPosts={latestPostList} />
