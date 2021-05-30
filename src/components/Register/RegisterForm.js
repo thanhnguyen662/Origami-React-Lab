@@ -1,5 +1,5 @@
 import React from 'react';
-import axios from 'axios'
+import userApi from '../.././api/userApi'
 import { FastField, Form, Formik } from 'formik';
 import InputField from '../../custom-fields/InputField';
 import * as Yup from 'yup'
@@ -19,14 +19,12 @@ function RegisterForm(props) {
 
     const handleOnSubmit = async (values, { resetForm }) => {
         try {
-            const loginValues = {
+            const registerValues = {
                 username: values.username,
                 password: values.password
             }
-
-            const response = await axios.post('http://localhost:9999/api/user/register', loginValues)
-            const { data } = response
-            console.log(data)
+            const response = await userApi.register(registerValues)
+            console.log('Register account successful: ', response)
 
             resetForm();
 

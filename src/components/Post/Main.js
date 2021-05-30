@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Post from './Post';
-import axios from "axios";
+import origamiApi from '../.././api/origamiApi'
 
 function Main() {
     const [postList, setPostList] = useState([])
@@ -8,20 +8,17 @@ function Main() {
     useEffect(() => {
         async function getPostList() {
             try {
-                const response = await axios.get('http://localhost:9999/api/origami/all')
-                const { data } = response
+                const response = await origamiApi.getPost()
+                console.log('Get post successful: ', response)
 
-                setPostList(data)
+                setPostList(response)
 
             } catch (error) {
-                console.log('Fail: ', error.message);
+                console.log('Fail: ', error);
             }
         }
         getPostList();
     }, []);
-
-
-
 
     return (
         <main className='Main'>
