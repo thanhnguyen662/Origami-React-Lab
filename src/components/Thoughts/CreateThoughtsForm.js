@@ -14,14 +14,16 @@ function CreateThoughtsForm(props) {
     const [description, setDescription] = useState('')
 
     function handleValueChange(e) {
+        console.log(e.target.value)
         setDescription(e.target.value)
     }
+
 
     function handleThoughtsSubmit(e) {
         e.preventDefault();
         if (!onThoughtsFormSubmit) return;
         const formValues = {
-            description: description
+            description: description,
         };
 
         onThoughtsFormSubmit(formValues);

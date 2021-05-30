@@ -1,70 +1,85 @@
-import React, { useState } from 'react';
+import React from 'react';
 import axios from 'axios'
+import { FastField, Form, Formik } from 'formik';
+import InputField from '../../custom-fields/InputField';
+import * as Yup from 'yup'
 
-
-function RegisterForm() {
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
-    const [rePassword, setRePassword] = useState('')
-
-    function handleEmailInputChange(e) {
-        setEmail(e.target.value)
+function RegisterForm(props) {
+    const initialValues = {
+        username: '',
+        password: '',
+        rePassword: '',
     }
 
-    function handlePasswordInputChange(e) {
-        setPassword(e.target.value)
-    }
+    const validationSchema = Yup.object().shape({
+        username: Yup.string().required('This field is required'),
+        password: Yup.string().required('This field is required'),
+        rePassword: Yup.string().oneOf([Yup.ref('password'), null], 'Password do not match')
+    })
 
-    function handleRePasswordInputChange(e) {
-        setRePassword(e.target.value)
-    }
+    const handleOnSubmit = async (values, { resetForm }) => {
+        try {
+            const loginValues = {
+                username: values.username,
+                password: values.password
+            }
 
-    function onSubmitRegisterForm(e) {
-        e.preventDefault();
+            const response = await axios.post('http://localhost:9999/api/user/register', loginValues)
+            const { data } = response
+            console.log(data)
 
-        const registerForm = {
-            username: email,
-            password: password,
-            rePassword: rePassword
+            resetForm();
+
+        } catch (error) {
+            console.log('Fail: ', error.message);
         }
-        console.log(registerForm)
-
-        axios.post('http://localhost:9999/api/user/register', registerForm)
-            .then(res => console.log(res))
     }
 
     return (
         <div className="Register">
             <h1>Register Page</h1>
-            <form onSubmit={onSubmitRegisterForm}>
-                <div className="form-control">
-                    <label>Email</label>
-                    <input
-                        type="email"
-                        value={email}
-                        onChange={handleEmailInputChange}
-                    />
-                </div>
-                <div className="form-control">
-                    <label>Password</label>
-                    <input
-                        type="password"
-                        value={password}
-                        onChange={handlePasswordInputChange}
-                    />
-                </div>
-                <div className="form-control">
-                    <label>Re-Password</label>
-                    <input
-                        type="password"
-                        value={rePassword}
-                        onChange={handleRePasswordInputChange}
-                    />
-                </div>
-                <div className="form-control">
-                    <button type="submit">Register</button>
-                </div>
-            </form>
+            <Formik
+                initialValues={initialValues}
+                validationSchema={validationSchema}
+                onSubmit={handleOnSubmit}
+            >
+                {(formikProps) => {
+                    const { values, errors, touched } = formikProps;
+                    console.log({ values, errors, touched });
+
+                    return (
+                        <Form>
+                            <FastField
+                                name="username"
+                                component={InputField}
+                                type="email"
+
+                                label="Email"
+                            />
+
+                            <FastField
+                                name="password"
+                                component={InputField}
+                                type="password"
+
+                                label="Password"
+                            />
+
+                            <FastField
+                                name="rePassword"
+                                component={InputField}
+                                type="password"
+
+                                label="Re-Password"
+                            />
+
+                            <div className="form-control">
+                                <button type="submit">Register</button>
+                            </div>
+                        </Form>
+                    )
+                }}
+            </Formik>
         </div>
     );
 }

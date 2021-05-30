@@ -3,6 +3,7 @@ import CreateThoughtsForm from './CreateThoughtsForm';
 import LatestPost from './LatestPost';
 import axios from "axios";
 
+
 function Thoughts(props) {
     const [latestPostList, setLatestPostList] = useState([])
     useEffect(() => {
@@ -19,8 +20,19 @@ function Thoughts(props) {
         getLatestPost()
     }, [])
 
-    function handleThoughtsFormSubmit(formValues) {
+    async function handleThoughtsFormSubmit(formValues) {
         console.log('Form submit: ', formValues)
+        try {
+            const accessToken = localStorage.getItem('token')
+            const response = await axios.post('http://localhost:9999/api/origami', formValues, {
+                headers: {
+                    'Authorization': accessToken
+                }
+            })
+            console.log(response)
+        } catch (error) {
+            console.log('Fail: ', error.message);
+        }
     }
 
     return (
@@ -31,7 +43,6 @@ function Thoughts(props) {
                 <LatestPost latestPosts={latestPostList} />
             </div>
         </div>
-
     );
 }
 

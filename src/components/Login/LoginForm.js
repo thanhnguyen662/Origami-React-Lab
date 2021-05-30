@@ -6,26 +6,29 @@ const LoginForm = () => {
     const [password, setPassword] = useState('')
 
     function handleEmailInputChange(e) {
-        console.log(e.target.value)
         setEmail(e.target.value)
     }
 
     function handlePasswordInputChange(e) {
-        console.log(e.target.value)
         setPassword(e.target.value)
     }
 
-    function onSubmitLoginForm(e) {
+    async function onSubmitLoginForm(e) {
         e.preventDefault()
 
-        const loginForm = {
-            username: email,
-            password: password
-        }
-        console.log(loginForm)
+        try {
+            const loginForm = {
+                username: email,
+                password: password,
+            }
+            const response = await axios.post('http://localhost:9999/api/user/login', loginForm, { withCredentials: true })
+            const storageToken = await localStorage.setItem('token', response.data.token)
+            console.log(storageToken)
+            console.log(response)
 
-        axios.post('http://localhost:9999/api/user/login', loginForm)
-            .then(res => console.log(res))
+        } catch (error) {
+            console.log('Fail: ', error.message);
+        }
     }
 
     return (
