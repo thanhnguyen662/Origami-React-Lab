@@ -1,31 +1,31 @@
-import React, { useState } from 'react';
-import axios from 'axios'
+import React from 'react';
+import userApi from '../.././api/userApi'
+import { FastField, Form, Formik } from 'formik';
+import InputField from '../../custom-fields/InputField';
+import * as Yup from 'yup'
 
 const LoginForm = () => {
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
-
-    function handleEmailInputChange(e) {
-        setEmail(e.target.value)
+    const initialValues = {
+        username: '',
+        password: '',
     }
 
-    function handlePasswordInputChange(e) {
-        setPassword(e.target.value)
-    }
+    const validationSchema = Yup.object().shape({
+        username: Yup.string().required('This field is required'),
+        password: Yup.string().required('This field is required'),
+    })
 
-    async function onSubmitLoginForm(e) {
-        e.preventDefault()
-
+    const handleOnSubmit = async (values, { resetForm }) => {
         try {
-            const loginForm = {
-                username: email,
-                password: password,
+            const loginValues = {
+                username: values.username,
+                password: values.password
             }
-            const response = await axios.post('http://localhost:9999/api/user/login', loginForm, { withCredentials: true })
-            const storageToken = await localStorage.setItem('token', response.data.token)
-            console.log(storageToken)
-            console.log(response)
 
+            const response = await userApi.login(loginValues)
+            console.log('Login account successful: ', response)
+
+            resetForm();
         } catch (error) {
             console.log('Fail: ', error.message);
         }
@@ -34,27 +34,40 @@ const LoginForm = () => {
     return (
         <div className="Register">
             <h1>Login Page</h1>
-            <form onSubmit={onSubmitLoginForm}>
-                <div className="form-control">
-                    <label>Email</label>
-                    <input
-                        type="email"
-                        value={email}
-                        onChange={handleEmailInputChange}
-                    />
-                </div>
-                <div className="form-control">
-                    <label>Password</label>
-                    <input
-                        type="Password"
-                        value={password}
-                        onChange={handlePasswordInputChange}
-                    />
-                </div>
-                <div className="form-control">
-                    <button type="submit">Login</button>
-                </div>
-            </form>
+            <Formik
+                initialValues={initialValues}
+                validationSchema={validationSchema}
+                onSubmit={handleOnSubmit}
+            >
+                {(formikProps) => {
+                    const { values, errors, touched } = formikProps
+                    console.log({ values, errors, touched })
+
+                    return (
+                        <Form>
+                            <FastField
+                                name="username"
+                                component={InputField}
+                                type="email"
+
+                                label="Email"
+                            />
+
+                            <FastField
+                                name="password"
+                                component={InputField}
+                                type="password"
+
+                                label="Password"
+                            />
+
+                            <div className="form-control">
+                                <button type="submit">Login</button>
+                            </div>
+                        </Form>
+                    )
+                }}
+            </Formik>
 
         </div>
     );
