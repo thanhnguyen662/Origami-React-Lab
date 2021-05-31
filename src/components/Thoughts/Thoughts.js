@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import CreateThoughtsForm from './CreateThoughtsForm';
-import axios from "axios";
 import origamiApi from '../.././api/origamiApi'
 import Post from '../Post/Post';
 
 function Thoughts(props) {
     const [postList, setPostList] = useState([])
+    const [isOk, setIsOk] = useState('0')
 
     useEffect(() => {
         async function getLatestPost() {
@@ -20,16 +20,17 @@ function Thoughts(props) {
             }
         }
         getLatestPost()
-    }, [])
+    }, [isOk])
 
-    async function handleThoughtsFormSubmit(formValues) {
-        console.log('Form submit: ', formValues)
+    async function handleThoughtsFormSubmit(thoughtsValues) {
+        console.log('Form submit: ', thoughtsValues)
         try {
-            const response = await axios.post('http://localhost:9999/api/origami', formValues,)
+            const response = await origamiApi.postThoughts(thoughtsValues)
+            console.log('Post successful: ', response)
 
-            console.log(response)
+            setIsOk(isOk + 1)
         } catch (error) {
-            console.log('Fail: ', error);
+            console.log('Fail: ', error.message);
         }
     }
 

@@ -11,9 +11,13 @@ import LoginForm from "./components/Login/LoginForm"
 import Profile from "./components/Profile/Profile"
 import Four0Four from './components/404/Four0Four';
 
+//const Main = lazy(() => import('./components/Post/Main'));
+//const Thoughts = lazy(() => import('./components/Thoughts/Thoughts'));
+
 function App() {
 
   return (
+    // <Suspense fallback={<p>Loading</p>}>
     <Router>
       <div className='App'>
         <Navbar />
@@ -31,6 +35,7 @@ function App() {
         <Footer />
       </div>
     </Router>
+    // </Suspense>
   );
 }
 
