@@ -8,7 +8,9 @@ const userApi = {
 
     login: (loginValues) => {
         const url = '/user/login'
-        return axiosClient.post(url, loginValues, { withCredentials: true })
+        return axiosClient.post(url, loginValues, {
+            withCredentials: true
+        })
     },
 
     mineProfile: () => {

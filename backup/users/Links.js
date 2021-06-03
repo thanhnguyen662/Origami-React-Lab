@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
-import FooterLI from './FooterLI';
-import logo3 from '../../../img/logo3.png'
 
-function FooterUL(props) {
-    const [footerTitle] = useState([
+
+function Links(props) {
+    const [linkTitle] = useState([
         {
             id: 1,
             title: 'Posts',
@@ -29,18 +28,15 @@ function FooterUL(props) {
             title: 'Profile',
             to: '/profile'
         },
-    ]);
+    ])
 
     return (
-        <footer className="Footer">
+        <aside className="Aside" style={{ marginLeft: '10px' }}>
             <ul>
-                <FooterLI links={footerTitle} />
-                <li className="listItem">
-                    <img src={logo3} alt="img" />
-                </li>
+                <Aside links={linkTitle} />
             </ul>
-        </footer>
+        </aside>
     );
 }
 
-export default FooterUL;
+export default Links;

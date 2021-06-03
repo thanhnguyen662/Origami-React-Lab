@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 FooterLI.propTypes = {
     links: PropTypes.array
@@ -11,11 +12,13 @@ FooterLI.defaultProps = {
 
 function FooterLI(props) {
 
-    const {links} = props;
+    const { links } = props;
 
     return (
         links.map(link => (
-            <li className="listItem" key={link.id}>{link.title}</li>
+            <Link className="listItem" key={link.id} to={link.to}>
+                {link.title}
+            </Link>
         ))
     );
 }

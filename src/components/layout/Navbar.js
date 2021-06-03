@@ -2,9 +2,11 @@ import React from 'react';
 import logo from '../../img/logo1.png'
 import { animateScroll as scroll } from 'react-scroll'
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 
 function Navbar() {
+    const loginState = useSelector(state => state.login.isLogin);
 
     return (
         <nav className="Navigation" >
@@ -25,9 +27,12 @@ function Navbar() {
                     <Link to="/register">Register</Link>
                 </li>
 
-                <li className="listItem">
-                    <Link to="/login">Login</Link>
-                </li>
+                {loginState === false
+                    ? <li className="listItem">
+                        <Link to="/login">Login</Link>
+                    </li>
+                    : <></>
+                }
 
                 <li className="listItem">
                     <Link to="/profile">Profile</Link>

@@ -2,14 +2,14 @@ import './App.css';
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import React from 'react';
 import Main from './components/Post/Main';
-import Navbar from './components/layout/Navbar'
-import Aside from './components/layout/Aside'
-import Footer from './components/layout/Footer';
 import Thoughts from "./components/Thoughts/Thoughts"
 import RegisterForm from "./components/Register/RegisterForm"
 import LoginForm from "./components/Login/LoginForm"
 import Profile from "./components/Profile/Profile"
 import Four0Four from './components/404/Four0Four';
+import Navbar from './components/layout/Navbar'
+import Footer from './components/layout/Footer'
+import Aside from './components/layout/Aside'
 
 //const Main = lazy(() => import('./components/Post/Main'));
 //const Thoughts = lazy(() => import('./components/Thoughts/Thoughts'));

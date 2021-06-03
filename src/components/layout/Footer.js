@@ -2,8 +2,10 @@ import React from 'react';
 import logo3 from '../../img/logo3.png';
 import { animateScroll as scroll } from 'react-scroll'
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 function Footer(props) {
+    const loginState = useSelector(state => state.login.isLogin);
 
     return (
         <footer className="Footer" >
@@ -20,9 +22,12 @@ function Footer(props) {
                     <Link to="/register">Register</Link>
                 </li>
 
-                <li className="listItem">
-                    <Link to="/login">Login</Link>
-                </li>
+                {loginState === false
+                    ? <li className="listItem">
+                        <Link to="/login">Login</Link>
+                    </li>
+                    : <></>
+                }
 
                 <li className="listItem">
                     <Link to="/profile">Profile</Link>

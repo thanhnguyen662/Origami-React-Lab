@@ -3,8 +3,14 @@ import userApi from '../.././api/userApi'
 import { FastField, Form, Formik } from 'formik';
 import InputField from '../../custom-fields/InputField';
 import * as Yup from 'yup'
+import { useDispatch, useSelector } from 'react-redux';
+import { loginSuccessful } from '../../actions/login';
 
 const LoginForm = () => {
+    const loginState = useSelector(state => state.login.isLogin);
+    const dispatch = useDispatch();
+    console.log('Login Status: ', loginState)
+
     const initialValues = {
         username: '',
         password: '',
@@ -25,6 +31,9 @@ const LoginForm = () => {
             const response = await userApi.login(loginValues)
             console.log('Login account successful: ', response)
 
+            const action = loginSuccessful()
+            dispatch(action)
+
             resetForm();
         } catch (error) {
             console.log('Fail: ', error.message);
@@ -39,9 +48,9 @@ const LoginForm = () => {
                 validationSchema={validationSchema}
                 onSubmit={handleOnSubmit}
             >
-                {(formikProps) => {
-                    const { values, errors, touched } = formikProps
-                    console.log({ values, errors, touched })
+                {() => {
+                    // const { values, errors, touched } = formikProps
+                    // console.log({ values, errors, touched })
 
                     return (
                         <Form>

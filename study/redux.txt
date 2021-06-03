@@ -1,0 +1,28 @@
+Reducer: người nhận vào state và action để tiến hành thay đổi
+	- các reducer tập hợp vào index.js (root reducer)
+	- chuyển từ state cũ -> state mới dựa vào action type
+		* useSelecttor: lấy dữ liệu từ redux store (state)
+		* useDispatch: giúp dispatch 1 action
+
+Actions: hành vi của người dùng
+
+*mỗi action có 1 reducer
+
+
+store: nhận vào root reducer
+	- setup store provider cho component
+
+*****REDUCER*******
+setup reducers
+	- giá trị khởi tạo
+	- nhận vào state của người dùng và action tương ứng để thực hiện theo từng case
+	- trả về một state mới
+
+setup root reducer
+	- một hàm combineReducer để gộp các reducer lại với nhau
+		*mỗi reducer quản lý 1 state nhỏ, và gom lại 1 state chung => quản lý tốt hơn
+
+*****STORE*******
+	- setup store từ rootReducer
+	- và export để sử dụng cho tất cả component của app
+

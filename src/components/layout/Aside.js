@@ -1,7 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 function Aside() {
+    const loginState = useSelector(state => state.login.isLogin);
 
     return (
         <aside className="Aside">
@@ -18,9 +20,12 @@ function Aside() {
                     <Link to="/register">Register</Link>
                 </li>
 
-                <li className="listItem">
-                    <Link to="/login">Login</Link>
-                </li>
+                {loginState === false
+                    ? <li className="listItem">
+                        <Link to="/login">Login</Link>
+                    </li>
+                    : <></>
+                }
 
                 <li className="listItem">
                     <Link to="/profile">Profile</Link>
