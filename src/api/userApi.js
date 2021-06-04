@@ -19,6 +19,13 @@ const userApi = {
             baseURL: 'http://localhost:9999/',
             withCredentials: true
         })
+    },
+
+    logout: () => {
+        const url = '/user/logout'
+        return axiosClient.post(url, {
+            withCredentials: true
+        })
     }
 }
 

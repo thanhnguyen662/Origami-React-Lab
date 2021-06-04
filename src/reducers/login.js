@@ -1,23 +1,16 @@
 const initialState = {
-    isLogin: false,
+    loginStatus: false
 }
 
 const loginReducer = (state = initialState, action) => {
     switch (action.type) {
-        case 'LOGIN_SUCCESSFUL': {
-            // const newStatus = { ...state }
-            // newStatus.isLogin = true
-            // console.log(newStatus)
+        case 'LOGIN_STATUS': {
+            const newLoginStatus = action.payload
 
-            const newStatus = true
             return {
-                isLogin: newStatus
+                ...state,
+                loginStatus: newLoginStatus
             }
-        }
-
-        case 'LOGIN_FAIL': {
-            state.isLogin(false)
-            return state
         }
 
         default:

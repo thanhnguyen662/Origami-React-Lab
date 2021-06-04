@@ -1,18 +1,27 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { useSelector } from 'react-redux';
 
 MineProfile.propTypes = {
     mineProfile: PropTypes.object,
-    numOfPosts: PropTypes.any
+    numOfPosts: PropTypes.any,
+    onClick: PropTypes.func
 };
 
 MineProfile.defaultProps = {
     mineProfile: [],
-    numOfPosts: ''
+    numOfPosts: '',
+    onClick: null
 }
 
 function MineProfile(props) {
-    const { mineProfile, numOfPosts } = props;
+    const { mineProfile, numOfPosts, onClick } = props;
+    const loginStatus = useSelector(state => state.login.loginStatus);
+
+    function handleOnClick() {
+        if (loginStatus === false) return
+        onClick()
+    }
 
     return (
         <>
@@ -27,6 +36,15 @@ function MineProfile(props) {
                     {numOfPosts}
                 </p>
             </div>
+
+            {loginStatus === true
+                &&
+                <button
+                    onClick={handleOnClick}
+                >
+                    Logout
+                </button>
+            }
         </>
     );
 }

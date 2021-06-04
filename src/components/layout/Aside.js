@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 function Aside() {
-    const loginState = useSelector(state => state.login.isLogin);
+    const loginStatus = useSelector(state => state.login.loginStatus);
 
     return (
         <aside className="Aside">
@@ -16,20 +16,23 @@ function Aside() {
                     <Link to="/thoughts">Thoughts</Link>
                 </li>
 
-                <li className="listItem">
-                    <Link to="/register">Register</Link>
-                </li>
-
-                {loginState === false
-                    ? <li className="listItem">
-                        <Link to="/login">Login</Link>
+                {loginStatus === false
+                    && <li className="listItem">
+                        <Link to="/register">Register</Link>
                     </li>
-                    : <></>
                 }
 
-                <li className="listItem">
-                    <Link to="/profile">Profile</Link>
-                </li>
+                {loginStatus === false
+                    && <li className="listItem">
+                        <Link to="/login">Login</Link>
+                    </li>
+                }
+
+                {loginStatus === true
+                    && <li className="listItem">
+                        <Link to="/profile">Profile</Link>
+                    </li>
+                }
             </ul>
         </aside>
     );

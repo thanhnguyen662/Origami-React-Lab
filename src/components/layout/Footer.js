@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 function Footer(props) {
-    const loginState = useSelector(state => state.login.isLogin);
+    const loginStatus = useSelector(state => state.login.loginStatus);
 
     return (
         <footer className="Footer" >
@@ -18,20 +18,24 @@ function Footer(props) {
                     <Link to="/thoughts">Thoughts</Link>
                 </li>
 
-                <li className="listItem">
-                    <Link to="/register">Register</Link>
-                </li>
+                {loginStatus === false
+                    && <li className="listItem">
+                        <Link to="/register">Register</Link>
+                    </li>
+                }
 
-                {loginState === false
+                {loginStatus === false
                     ? <li className="listItem">
                         <Link to="/login">Login</Link>
                     </li>
                     : <></>
                 }
 
-                <li className="listItem">
-                    <Link to="/profile">Profile</Link>
-                </li>
+                {loginStatus === true
+                    && <li className="listItem">
+                        <Link to="/profile">Profile</Link>
+                    </li>
+                }
 
                 <li className="listItem" onClick={() => scroll.scrollToTop()}>
                     <img src={logo3} alt="img" />

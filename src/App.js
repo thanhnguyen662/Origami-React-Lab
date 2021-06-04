@@ -10,14 +10,12 @@ import Four0Four from './components/404/Four0Four';
 import Navbar from './components/layout/Navbar'
 import Footer from './components/layout/Footer'
 import Aside from './components/layout/Aside'
-
-//const Main = lazy(() => import('./components/Post/Main'));
-//const Thoughts = lazy(() => import('./components/Thoughts/Thoughts'));
+import { useSelector } from 'react-redux';
 
 function App() {
+  const loginStatus = useSelector(state => state.login.loginStatus);
 
   return (
-    // <Suspense fallback={<p>Loading</p>}>
     <Router>
       <div className='App'>
         <Navbar />
@@ -26,16 +24,27 @@ function App() {
           <Switch>
             <Route exact path="/" component={Main} />
             <Route exact path="/thoughts" component={Thoughts} />
-            <Route exact path="/register" component={RegisterForm} />
-            <Route exact path="/login" component={LoginForm} />
-            <Route exact path="/profile" component={Profile} />
+            <Route path="/register" render={() => {
+              return loginStatus === false
+                ? <RegisterForm />
+                : <Main />
+            }} />
+            <Route path="/login" render={() => {
+              return loginStatus === false
+                ? <LoginForm />
+                : <Main />
+            }} />
+            <Route path="/profile" render={() => {
+              return loginStatus === true
+                ? <Profile />
+                : <LoginForm />
+            }} />
             <Route path="" component={Four0Four} />
           </Switch>
         </div>
         <Footer />
       </div>
     </Router>
-    // </Suspense>
   );
 }
 

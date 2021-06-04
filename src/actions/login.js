@@ -1,5 +1,6 @@
-export const loginSuccessful = (login) => {
+export const loginStatusSuccessfully = (status) => {
     return {
-        type: 'LOGIN_SUCCESSFUL',
+        type: 'LOGIN_STATUS',
+        payload: status
     }
 }

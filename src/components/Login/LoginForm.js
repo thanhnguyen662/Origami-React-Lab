@@ -4,12 +4,14 @@ import { FastField, Form, Formik } from 'formik';
 import InputField from '../../custom-fields/InputField';
 import * as Yup from 'yup'
 import { useDispatch, useSelector } from 'react-redux';
-import { loginSuccessful } from '../../actions/login';
+import { loginStatusSuccessfully } from '../../actions/login';
+
 
 const LoginForm = () => {
-    const loginState = useSelector(state => state.login.isLogin);
+    const loginStatus = useSelector(state => state.login.loginStatus);
+    console.log('Login Status: ', loginStatus)
+
     const dispatch = useDispatch();
-    console.log('Login Status: ', loginState)
 
     const initialValues = {
         username: '',
@@ -31,8 +33,10 @@ const LoginForm = () => {
             const response = await userApi.login(loginValues)
             console.log('Login account successful: ', response)
 
-            const action = loginSuccessful()
-            dispatch(action)
+            //change state at redux
+            const status = true
+            const loginStatusAction = loginStatusSuccessfully(status)
+            dispatch(loginStatusAction)
 
             resetForm();
         } catch (error) {
