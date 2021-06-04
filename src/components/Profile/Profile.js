@@ -41,6 +41,8 @@ function Profile(props) {
 
                 setMineProfile(response)
                 setNumOfPosts(response.posts.length)
+                console.log('Post: ', response)
+                console.log('Total: ', response.length)
 
             } catch (error) {
                 console.log('Fail: ', error.message);
